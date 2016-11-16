@@ -7,6 +7,9 @@ galaxy_info:
   platforms:
   - name: OpenBSD
     versions:
-    - 5.9
+    - 6.0
+  - name: Ubuntu
+    versions:
+    - xenial
   galaxy_tags: [ ansible ]
 dependencies: []

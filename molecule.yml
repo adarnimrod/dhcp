@@ -1,12 +1,10 @@
 ---
 ansible:
-  verbose: v
+  verbose: vv
   playbook: tests/playbook.yml
   diff: True
-
-molecule:
-  testinfra_dir: tests
-  ansible_config_template: ansible.cfg
+  config_file: ../ansible.cfg
+  requirements_file: tests/requirements.yml
 
 vagrant:
   providers:
@@ -14,10 +12,15 @@ vagrant:
     type: virtualbox
   platforms:
   - name: openbsd
-    box: kaorimatz/openbsd-5.9-amd64
+    box: kaorimatz/openbsd-6.0-amd64
+  - name: ubuntu
+    box: ubuntu/xenial64
   instances:
   - name: ansible-role-dhcp
     options:
         append_platform_to_hostname: yes
   raw_config_args:
   - 'vm.synced_folder ".", "/vagrant", disabled: true'
+  - 'vbguest.auto_update = false'
+  - 'landrush.enabled = false'
+  - 'landrush_ip.override = false'
