@@ -64,3 +64,4 @@ TODO
 - Assertions, tests.
 - Log to syslog.
 - Alias email to root.
+- Flush handlers and wait for service to come up.
