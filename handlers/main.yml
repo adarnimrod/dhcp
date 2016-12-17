@@ -1,2 +1,11 @@
 ---
 # handlers file for dhcp
+
+- name: Update SMTPd database
+  when: ansible_os_family == 'OpenBSD'
+  command: /usr/bin/newaliases
+
+- name: Restart ISC DHCP server
+  service:
+      name: '{{ dhcp_service[ansible_os_family] }}'
+      state: restarted

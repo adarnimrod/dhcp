@@ -1,2 +1,14 @@
 ---
 # vars file for dhcp
+
+dhcp_service:
+    OpenBSD: dhcpd
+    Debian: isc-dhcp-server
+
+aliases_file:
+    OpenBSD: /etc/mail/aliases
+    Debian: /etc/aliases
+
+dhcp_user:
+    OpenBSD: _dhcp
+    Debian: dhcp

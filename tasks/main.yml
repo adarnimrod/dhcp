@@ -4,5 +4,35 @@
 - name: Assertions
   assert:
     that:
-        - ansible_os_family in ['OpenBSD', 'Debian']
-        - ansible_distribution_release in ['6.0', 'xenial']
+        - ansible_os_family in dhcp_service
+        - ansible_os_family in dhcp_user
+        - ansible_os_family in aliases_file
+
+- name: APT install
+  apt:
+      name: isc-dhcp-server
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+
+- name: Add mail alias
+  when: dhcp_mail_alias is defined
+  lineinfile:
+      dest: '{{ aliases_file[ansible_os_family] }}'
+      create: yes
+      line: '{{ dhcp_user[ansible_os_family] }}: {{ dhcp_mail_alias }}'
+      regexp: '{{ dhcp_user[ansible_os_family] }}:'
+  notify:
+      - Update SMTPd database
+
+- name: Enable service
+  service:
+      name: '{{ dhcp_service[ansible_os_family] }}'
+      state: running
+      enabled: yes
+
+- meta: flush_handlers
+
+- name: Wait for service to come online
+  wait_for:
+      port: 67

@@ -1,2 +1,4 @@
 ---
 # defaults file for dhcp
+
+dhcp_mail_alias: root
