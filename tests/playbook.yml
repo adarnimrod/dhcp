@@ -11,6 +11,7 @@
   strategy: free
   roles:
     - role: dhcp
+      dhcp_config: "{{ lookup('template', 'dhcpd.conf.j2') }}"
   post_tasks: # For testing.
       - name: APT install
         when: ansible_pkg_mgr == 'apt'

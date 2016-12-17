@@ -12,3 +12,7 @@ aliases_file:
 dhcp_user:
     OpenBSD: _dhcp
     Debian: dhcp
+
+dhcp_conf_file:
+    OpenBSD: /etc/dhcpd.conf
+    Debian: /etc/dhcp/dhcpd.conf

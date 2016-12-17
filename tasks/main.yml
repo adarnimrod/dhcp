@@ -7,6 +7,8 @@
         - ansible_os_family in dhcp_service
         - ansible_os_family in dhcp_user
         - ansible_os_family in aliases_file
+        - ansible_os_family in dhcp_conf_file
+        - dhcp_config is defined
 
 - name: APT install
   apt:
@@ -24,6 +26,16 @@
       regexp: '{{ dhcp_user[ansible_os_family] }}:'
   notify:
       - Update SMTPd database
+
+- name: Copy configuration
+  copy:
+      content: '{{ dhcp_config }}'
+      dest: '{{ dhcp_conf_file[ansible_os_family] }}'
+      owner: root
+      group: 0
+      mode: 0o0644
+  notify:
+      - Restart ISC DHCP server
 
 - name: Enable service
   service:
