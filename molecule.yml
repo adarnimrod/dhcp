@@ -4,6 +4,9 @@ ansible:
   playbook: tests/playbook.yml
   diff: True
   config_file: ../ansible.cfg
+
+dependency:
+  name: galaxy
   requirements_file: tests/requirements.yml
 
 vagrant:
@@ -13,10 +16,10 @@ vagrant:
   platforms:
   - name: openbsd
     box: kaorimatz/openbsd-6.0-amd64
-  - name: ubuntu
+  - name: xenial
     box: ubuntu/xenial64
   instances:
-  - name: ansible-role-dhcp
+  - name: dhcp
     options:
         append_platform_to_hostname: yes
   raw_config_args:
@@ -24,3 +27,17 @@ vagrant:
   - 'vbguest.auto_update = false'
   - 'landrush.enabled = false'
   - 'landrush_ip.override = false'
+
+docker:
+  containers:
+  - name: dhcp-xenial
+    image: ubuntu
+    image_version: xenial
+    command: /sbin/init
+    privileged: True
+    volume_mounts:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+    environment:
+        DEBIAN_FRONTEND: noninteractive
+        container: docker

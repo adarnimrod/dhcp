@@ -1,5 +1,5 @@
 ---
-# tasks file for ansible-role-dhcp
+# tasks file for dhcp
 
 - name: Assertions
   assert:

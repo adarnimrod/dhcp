@@ -1,12 +1,13 @@
 ---
-- hosts: ansible-role-example-openbsd
+- hosts: dhcp-openbsd
   gather_facts: false
-  roles: [openbsd_bootstrap]
+  roles: [openbsd-bootstrap]
 
-- hosts: ansible-role-example-ubuntu
+- hosts: dhcp-xenial
   gather_facts: false
-  roles: [debian_bootstrap]
+  roles: [debian-bootstrap]
 
 - hosts: all
+  strategy: free
   roles:
-    - role: ansible-role-dhcp
+    - role: dhcp
