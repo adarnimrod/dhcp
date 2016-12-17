@@ -11,3 +11,9 @@
   strategy: free
   roles:
     - role: dhcp
+  post_tasks: # For testing.
+      - name: APT install
+        when: ansible_pkg_mgr == 'apt'
+        apt:
+            name: ['net-tools']
+            state: present
