@@ -47,4 +47,4 @@
 
 - name: Wait for service to come online
   wait_for:
-      port: 67
+      path: /var/run/dhcp-server/dhcpd.pid

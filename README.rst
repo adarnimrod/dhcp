@@ -59,12 +59,3 @@ Nimrod Adar, `contact me <nimrod@shore.co.il>`_ or visit my `website
 <https://www.shore.co.il/>`_. Patches are welcome via `git send-email
 <http://git-scm.com/book/en/v2/Git-Commands-Email>`_. The repository is located
 at: https://www.shore.co.il/git/.
-
-TODO
-----
-
-- Flush handlers at the end of the role and wait for the service to come online.
-- Assertions, tests.
-- Log to syslog.
-- Alias email to root.
-- Flush handlers and wait for service to come up.

@@ -1,4 +1,5 @@
 authoritative;
 subnet {{ ansible_default_ipv4.network }} netmask {{ ansible_default_ipv4.netmask }}
 {
+    range {{ (ansible_default_ipv4.address|ipaddr('int') + 1) | ipaddr }} {{ (ansible_default_ipv4.address|ipaddr('int') + 2) | ipaddr }};
 }
