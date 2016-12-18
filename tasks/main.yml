@@ -11,6 +11,7 @@
         - dhcp_config is defined
 
 - name: APT install
+  when: ansible_pkg_mgr == 'apt'
   apt:
       name: isc-dhcp-server
       state: present
@@ -46,5 +47,6 @@
 - meta: flush_handlers
 
 - name: Wait for service to come online
+  when: ansible_os_family == 'Debian'
   wait_for:
       path: /var/run/dhcp-server/dhcpd.pid

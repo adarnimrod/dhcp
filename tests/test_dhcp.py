@@ -13,4 +13,5 @@ def test_dhcp_service(Service, Socket, SystemInfo):
         assert service.is_enabled
     except NotImplementedError:
         pass
-    assert Socket('udp://0.0.0.0:67').is_listening
+    if SystemInfo.type == 'linux':
+        assert Socket('udp://0.0.0.0:67').is_listening
