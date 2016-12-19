@@ -15,3 +15,9 @@ def test_dhcp_service(Service, Socket, SystemInfo):
         pass
     if SystemInfo.type == 'linux':
         assert Socket('udp://0.0.0.0:67').is_listening
+
+
+def test_dhcp_confi(Sudo, Command, SystemInfo):
+    if SystemInfo.type == 'linux':
+        with Sudo():
+            assert Command('dhcpd -t').rc == 0
