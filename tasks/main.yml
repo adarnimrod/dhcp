@@ -35,9 +35,13 @@
       owner: root
       group: 0
       mode: 0o0644
-      validate: '{{ dhcp_conf_validate[ansible_os_family]|default(omit) }}'
   notify:
       - Restart ISC DHCP server
+
+- name: Validate config
+  when: ansible_os_family in dhcp_conf_validate
+  command: '{{ dhcp_conf_validate[ansible_os_family] }}'
+  changed_when: False
 
 - name: Enable service
   service:
