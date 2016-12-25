@@ -16,3 +16,6 @@ dhcp_user:
 dhcp_conf_file:
     OpenBSD: /etc/dhcpd.conf
     Debian: /etc/dhcp/dhcpd.conf
+
+dhcp_conf_validate:
+    Debian: dhcpd -t
